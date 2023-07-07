@@ -1,5 +1,5 @@
 tutorBot ist ein Shell-Skript, das den Inhalt einer Datei ausliest
-und die ungerade und geraden Zeilen jeweils in einen Array liest.
+und die ungeraden und geraden Zeilen jeweils in einen Array liest.
 
 Der Aufbau der Datei sollte dabei folgendem Schema folgen:
 Ungerade Zeilen sind Fragen,
