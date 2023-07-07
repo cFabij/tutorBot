@@ -1,0 +1,286 @@
+#!/bin/bash
+
+# ------------- SKRIPT-BESCHREIBUNG --------------
+# tutorBot liest Fragen und Antworten aus einer externen Datei
+# (Standard: /usr/Bin/fragenkatalog) jeweils in eigene Arrays ein
+# und stellt in Folge dem Nutzer alle eingelesenen Fragen in einer zufälligen Reihenfolge.
+# Die so dann angefragte Eingabe des Nutzers wird mit dem jeweiligen
+# Antwort-Array verglichen.
+# Das Programm läuft bis alle Fragen richtig beantwortet sind,
+# bis der Nutzer SAVEEXIT eingibt oder anderweitig das Skript
+# beendet.
+
+
+# Skript erstellt im Rahmen des Linux-Monats vom BearingPoint
+# IT-Bootcamp (BC#6) zur Vorbereitung auf das Fachgespräch.
+
+# Author: Christopher Junkers
+
+
+clear
+
+
+# Es werden Nutzer-spezifische Pfade initialisiert, um 
+# individuelle Fragenkataloge einzubinden, falls Beendigung mittels SAVEEXIT erfolgte.
+# In Folge wird abgefragt, ob im Pfad die entsprechende Datei vorhanden ist
+# und ob sie eingelesen werden soll.
+# Default ist der Fragenkatalog unter /usr/bin/fragenkatalog gespeichert.
+
+
+user="$(whoami)"
+file=/home/"$user"/fragenkatalog
+repeatFile=/home/"$user"/fragen_wiederholen
+sdFile="/usr/bin/fragenkatalog"
+fragenkatalog="$sdFile"
+
+if [ -e "$file" ] && [ -e "$repeatFile" ]
+then
+	echo "Nur unklare Fragen wiederholen? (j/n)"
+	read -e input
+
+	if [ "$input" == "j" ]
+	then
+		fragenkatalog="$repeatFile"
+		repeat=true
+	fi
+fi
+
+if [ -e "$file" ] && [ ! "$repeat" ]
+then
+	echo "Eigene Version des Fragenkatologs benutzen? (j/n)"
+	read -e input
+
+	if [ "$input" == "j" ]
+	then
+		fragenkatalog="$file"
+	fi
+fi
+
+lineCount=1
+qArr=()
+aArr=()
+solvedArr=()
+repeatArr=()
+answeredQ=0
+
+
+# Der spezifische Fragenkatalog wird auf zwei Arrays aufgeteilt.
+# Wobei ungerade Zeilennummern Fragen darstellen und gerade Zeilennummer Antworten.
+
+
+while read -r line
+do
+	if [ $(( lineCount%2 )) -eq 0 ]
+	then
+		aArr+=("$line")
+	else
+		qArr+=("$line")
+	fi	
+
+	let "lineCount++"
+
+done < "$fragenkatalog"
+
+qArrLength="${#qArr[@]}"
+
+
+# Funktion, um einen zufälligen Index aus dem Fragen-Arrays einzuwählen.
+# Nach oben hin limitiert mit der Länge des Fragen-Arrays.
+
+
+randomizer () {
+	limit="$1"
+
+	randomized="$(( $RANDOM % $limit + 0 ))"
+
+	echo "$randomized"
+}
+
+
+# Start des Hauptteils des Skripts
+
+
+while true
+do
+	clear
+	
+	solvedArrLength="${#solvedArr[@]}"
+	
+	if [ "$solvedArrLength" == "$qArrLength" ]
+	then
+		echo "Alle Fragen beantwortet. Vielen Dank fürs Spielen!"
+		break 2
+	fi
+	
+	echo	" -----------------------------------------------------------------------------------------------------------------------------"
+	echo -e " | \033[43m\e[1;31m WICHTIG! \e[0m\033[40m                                                                                                                |"
+	echo -e " | Gehe immer von \e[1;31mRELATIVEN PFADEN\e[0m aus. Außer in der Frage steht explizit etwas anderes.                                     |"
+	echo -e " | Wenn du Anführungszeichen verwendest, nimm immer die \e[1;31mEINFACHEN ANFÜHRUNGSZEICHEN (' ')\e[0m.                                   |"
+	echo -e " | \e[1;31mPARAMETER\e[0m wie Suchbegriffe oder zu verarbeitende Strings bitte immer in \e[1;31mEINFACHE ANFÜHRUNGSZEICHEN (' ')\e[0m setzen.          |"
+	echo -e " | Wenn bei Befehlen \e[1;31mOPTIONEN\e[0m einzugeben sind, dann sind diese zusammenzuschreiben. Z.B. \e[1;31mls -laF\e[0m.                            |"
+	echo -e " | \e[1;31mORDNER\e[0m immer mit einem \e[1;31mSLASH ( / )\e[0m am Ende eingeben.                                                                      |"
+	echo -e " | \e[1;31mSUDO\e[0m ist nur einzugeben, wenn direkt danach gefragt ist.                                                                  |"
+	echo -e	" | Mit \e[1;36mSAVEEXIT\e[0m werden die nicht gelösten Fragen in das Home-Verzeichnis des ausführenden Nutzers (\033[43m\e[1;31mnicht root\e[0m\033[40m) \e[1;31mÜBERSCHRIEBEN\e[0m.|"
+	echo -e " | Beim nächsten Programmstart wird dann gefragt, ob mit diesem Fragenkatalog gespielt werden soll.                          |"
+	echo -e " -----------------------------------------------------------------------------------------------------------------------------"
+	echo -e "\n"
+
+	echo "Anzahl aller Fragen: $qArrLength"
+	echo "Anzahl beantworteter Fragen: $answeredQ"
+	echo "Richtig beantwortete Fragen: $solvedArrLength"
+	echo -e "\n"
+
+
+	# Schleife, um zu kontrollieren, dass der zufällige Index keine Frage
+	# auswählt, die bereits gelöst wurde.
+
+
+	while true
+	do
+		count=0
+		randomIndex="$(randomizer $qArrLength)"
+		
+		for answer in "${solvedArr[@]}"
+		do
+			if [ $answer == $randomIndex ]
+			then
+				break 1
+			else
+				let "count++"
+			fi
+		done
+	
+		if [ "$count" == "$solvedArrLength" ]
+		then
+			break 1
+		fi
+	done
+	
+
+	# Schleife, um den Nutzer zu ermöglichen, die Frage nach einer falschen Antwort
+	# nochmal (korrekt) zu beantworten, wenn er möchte.
+
+
+	while true
+	do
+		echo "${qArr[$randomIndex]}"
+		
+		read -e input
+		echo -e "\n"
+
+
+		# Bei Eingabe von "SAVEEXIT" werden standardmäßig zwei individuelle Fragenkataloge erstellt:
+		# 1) Alle Fragen, die noch nicht beantwortet wurden.
+		# 2) Alle Fragen, die fehlerhaft beantwortet wurden.
+		# Danach wird das Skript beendet.
+
+		if [ "$input" == "SAVEEXIT" ]
+		then
+			if [ "$user" == "root" ]
+			then
+				echo -e "\033[41m\e[30mERROR\033[40m\e[0m: Als root angemeldet. Fragenkatalog nicht gespeichert."
+			else
+				count=0
+				
+				if [ -e "$file" ]
+				then
+					rm -f "$file"
+				fi
+				
+				if [ -e "$repeatFile" ]
+				then
+					rm -f "$repeatFile"
+				fi
+								
+				for index in "${!qArr[@]}"
+				do
+					for repeat in "${repeatArr[@]}"
+					do
+						if [ "$index" -eq "$repeat" ]
+						then		
+							echo "${qArr[$index]}" >> "$repeatFile"
+							echo "${aArr[$index]}" >> "$repeatFile"
+						fi
+					done
+
+					for answered in "${solvedArr[@]}"
+					do
+						if [ "$index" -eq "$answered" ]
+						then
+							break 1
+						fi
+					
+						let "count++"
+					done
+				
+					if [ "$count" -eq "$solvedArrLength" ]
+					then
+						echo "${qArr[$index]}" >> "$file"
+						echo "${aArr[$index]}" >> "$file"
+					fi		
+					count=0
+				done
+			fi		
+		break 2
+		fi
+		
+
+		# Nutzer-Eingabe wird überprüft, ob der Inhalt mit dem Antwort-Array überein stimmt.
+		# Bei Übereinstimmung wird der Index zum Solved-Array hinzugefügt.
+		# (Alle Indizes in Solved-Array gelangen bei SAVEEXIT nicht in den individuellen Fragenkatalog der noch offenen Fragen.)
+		# Falls es keine Übereinstimmung gibt, wird die Frage in den repeat-Array zur Fragen-Wiederholung aufgenommen.
+		
+
+		if [ "$input" == "${aArr[$randomIndex]}" ]
+		then
+			echo -e "\e[1;32mPERFEKT!\e[0m"
+			echo -e "\n"
+
+			solvedArr+=("$randomIndex")
+			
+			sleep 1
+
+			break 1
+		else
+			echo -e "\033[43m\e[30m Leider nicht korrekt. \e[0m\033[40m"
+			echo -e "Gib \e[1;36m'n'\e[0m ein, um es nochmal zu versuchen. Oder gib \e[1;36m'l'\e[0m, um die Lösung anzuzeigen (Frage bleibt dann vorerst ungelöst)"
+			
+			if [ ! "${#repeatArr[@]}" ]
+			then
+				for element in "${repeatArr[@]}"
+				do
+					if [ ! "$randomIndex" -eq "$element" ]		
+					then			
+						repeatArr+=("$randomIndex")
+					fi
+				done
+			else
+				repeatArr+=("$randomIndex")
+			fi
+	
+			read -e input
+			echo -e "\n"
+			
+			if [ ! "$input" == "n" ] && [ ! "$input" == "l" ]
+			then
+				break 1
+			
+			elif [ "$input" == "l" ]
+			then
+				echo -e "\n"
+				echo -e "Die Antwort wäre gewesen: \033[42m\e[30m ${aArr[$randomIndex]} \033[40m\e[0m"
+				echo -e "\n"
+				echo "Drücke eine beliebige Taste, um fortzufahren."
+
+				read -e input
+
+				break 1
+			fi
+
+		fi
+
+	done		
+
+	let "answeredQ++"
+
+done

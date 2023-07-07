@@ -1,0 +1,326 @@
+1) Wie lautet der Command, um den Inhalt des aktuellen Verzeichnisses auszugeben? (kein Alias)
+ls
+2) Welcher Command zeigt an, in welchem Ordner man sich derzeit befindet?
+pwd
+3) Wie kann man sich versteckte Dateien anzeigen lassen?
+ls -a
+4) Gib den Command ein, um aus der Datei /etc/passwd nur den Nutzer 'chris' anzuzeigen. (Nicht getent, aber Liebe geht raus <3)
+grep 'chris' /etc/passwd
+5) Erstelle die Ordner test, the und best mit einem Command.
+mkdir test the best
+6) Erstelle mit einem Command im Ordner mission1 den Unterordner manfred und im Unterordner manfred den Ordner linux.
+mkdir -p mission1/manfred/linux/
+7) Gehe mit absoluten Pfaden in das Verzeichnis vom User chris.
+cd /home/chris/
+8) Was ist der kürzeste Command, um ins eigene Home-Verzeichnis zu kommen?
+cd
+9) Erstelle die Datei linux und schreibe dort im gleichen Befehl 'Spaß' hinein.
+echo 'Spaß' > linux
+10) Gib den Inhalt des aktuelles Ordners in Listenform aus, wobei die zuletzt bearbeitete Datei unten stehen soll.
+ls -ltr
+11) Erstelle die Dateien linux, rocks und me mit einem Command.
+touch linux rocks me
+12) Kopiere die Datei linux in den Ordner mission1/.
+cp linux mission1/
+13) Kopiere den Ordner mission1/ samt Unterordner in den Ordner linux/.
+cp -r mission1/ linux/
+14) Verschiebe die Datei linux, rocks und me in das Home-Verzeichnis von chris (absoluter Pfad)
+mv linux rocks me /home/chris/
+15) Lösche den Ordner linux/ mit allen Dateien und Unterverzeichnissen.
+rm -r linux/
+16) Lösche die Dateien linux, ist und fad in einem Command.
+rm linux ist fad
+17) Füge der Datei linux den Text hinzu: 'less is more'.
+echo 'less is more' >> linux
+18) Erstelle die Datei fragen im Unterordner mission1/manfred/.
+touch mission1/manfred/fragen
+19) Wechsel in das Verzeichnis /var/log/.
+cd /var/log/
+20) Wechsel vom Unterordner mission1/manfred/ in den Ordner mission1/ mittels relativer Pfade.
+cd ..
+21) Benenne die Datei linux in ubuntu um.
+mv linux ubuntu
+22) Kopiere die Datei ubuntu und nenne die Kopie redhat.
+cp ubuntu redhat
+23) Verschiebe alle Dateien im Ordner mission1, die mit test beginnen in den Ordner /home/chris/dump/.
+mv mission1/test* /home/chris/dump/
+24) Gib den Inhalt der Datei linux auf der Konsole aus.
+cat linux
+25) Zeige nur die Berechtigungen des Ordners /etc/ auf der Konsole an.
+ls -ld /etc/
+26) Verschiebe die Datei linux in den Ordner geheim/ und verstecke sie.
+mv linux geheim/.linux
+27) Zeige den Inhalt der versteckten Datei mit dem Namen linux auf der Konsole an.
+cat .linux
+28) Verschiebe den Ordner manfred/ samt Unterordner in den Ordner q_and_a/.
+mv manfred/ q_and_a/
+29) Ersetze das einzige Wort 'apt' in der Datei redhat durch 'yum' und speicher die Änderung.
+sed -i 's/apt/yum/' redhat
+30) Ersetze alle 'ha' in der Datei lacher mit 'ho' und speicher die Änderung.
+sed -i 's/ha/ho/g' lacher
+31) Wie kann man sich das Handbuch zum Befehl grep anzeigen lassen?
+man grep
+32) Wie lautet der Command für die Kurzhilfe zu grep? (Wort ausschreiben)
+grep --help
+33) Wie lege ich fest, dass ich mittels ll den Command ls -halF ausführen will (vollständige Zuweisung hinschreiben, an ' ' denken).
+alias ll='ls -halF'
+34) In welcher Variable wird der Text vor dem Prompt gespeichert?
+PS1
+35) In welcher Datei kann der User chris die Farbgestaltung seines eigenen Textes vor dem Prompt bearbeiten (absoluter Pfad, Ubuntu)?
+/home/chris/.bashrc
+36) Wie kann ich die Datei sehrlang aufrufen, um darin suchen zu können (nicht Editor).
+less sehrlang
+37) Wie kann ich innerhalb von man und der Ausgabe von less nach linux suchen?
+/linux
+38) Wie kann ich mir aus der Datei syslog nur die letzte Zeile ausgeben lassen?
+tail -1 syslog
+39) Wie kann ich mir vom Verzeichnis /etc/ nur die ersten fünf Zeilen ausgeben lassen?
+ls /etc/ | head -5
+40) Du hast in die Datei sehrlang unten eine Zeile hinzugefügt. Mit welchem Befehl kannst du gezielt nachschauen, ob das funktioniert hat?
+tail -1 sehrlang
+41) Lass dir in der Datei /etc/passwd nur den Nutzer 'root' anzeigen. (Nicht getent, Liebe geht raus <3)
+grep 'root' /etc/passwd
+42) Sortiere die Datei /etc/passwd alphabetisch nach Nutzern und gib das Resultat auf der Konsole aus.
+sort /etc/passwd
+43) In der Datei duplo stehen Werte doppelt. Entferne die doppelten Werte und speicher den bereinigten Inhalt in die Datei mars (in einer Zeile).
+sort duplo | uniq > mars
+44) Im Ordner chaos/ befinden sich unzählige Dokumente. In einem der Dokumente steht deine IBAN. Mit welchem Befehl kannst du die Datei finden, in der 'IBAN' steht?
+grep -r 'IBAN' chaos/
+45) Im Ordner rezepte/ befinden sich unzählige Dokumente. Du suchst etwas zum Kochen, magst aber keine Pizza. Wie kannst du dir nur die Dateien anzeigen lassen, in denen 'Pizza' nicht vorkommt?
+grep -rv 'Pizza' rezepte/
+46) Mit welchem Command sollte man die Datei /etc/sudoers bearbeiten?
+visudo
+47) Lege den User tux mit Home-Verzeichnis an (low-level-utility).
+useradd -m tux
+48) Ändere das Passwort von User tux.
+passwd tux
+49) Füge die Gruppe linuxlovers hinzu.
+groupadd linuxlovers
+50) Mache den User tux zusätzlich zum Gruppenmitglied von linuxlovers.
+usermod -aG linuxlovers tux
+51) Frage ab, zu welchen Gruppen der User tux gehört.
+groups tux
+52) In welcher Datei stehen alle Gruppen des Systems (absoluter Pfad)?
+/etc/group
+53) In welcher Datei stehen alle User des Systems (absoluter Pfad)?
+/etc/passwd
+54) In welcher Datei werden die Passwörter aller User des Systems gespeichert (absoluter Pfad)?
+/etc/shadow
+55) Wechsel den User auf tux, so dass du in seinem Home-Verzeichnis bist.
+su - tux
+56) Mit welchem Befehl machst du die Datei HalloWelt.sh für alle ausführbar? (Nicht Oktal-Schreibweise)
+chmod +x HalloWelt.sh
+57) Mit welchem Befehl gibst du nur dem Usereigentümer Lese- und Schreibrechte an der Datei geheim? (Oktal-Schreibweise)
+chmod 600 geheim
+58) Mit welchem Befehl darf sowohl der Usereigentümer als auch der Gruppeneigentümer die Datei geheim lesen und bearbeiten? (Oktal-Schreibweise)
+chmod 660 geheim
+59) Ändere den User-Eigentümer der Datei linux auf root.
+chown root linux
+60) Ändere die gesamten Eigentumsverhältnisse der Datei undweg auf root.
+chown root:root undweg
+61) Ändere den Gruppen-Eigentümer von linux auf root mittels chown.
+chown :root linux
+62) Gib den Command ein, um im gesamten System die Datei 'syslog' zu finden. Alle Fehlermeldungen sollen zu /dev/null gehen.
+find / -name 'syslog' 2>/dev/null
+63) Was kann man auf der Command Line eingeben, um zu sehen, in welchem Ordnern das System nach ausführbaren Dateien sucht?
+echo $PATH
+64) Wenn die Datei HalloWelt in /home/chris/bin/ für alle ausführbar ist, kann sie dann jeder User aufrufen? (j/n)
+n
+65) In welchem Verzeichnis findest du Logs (absoluter Pfad)?
+/var/log/
+66) Zeig mittels Befehl am Terminal an, wer alles Mitglied in der Gruppe 'sudo' ist. (Liebe geht raus, wer an getent group 'sudo' dachte, aber das ist hier nicht gemeint ; ))
+grep 'sudo' /etc/group
+67) Was ist die Standard-Shell für Service-User? (nur der Name, nicht absoluter Pfad)
+nologin
+68) Wer hat Schreibrechte in /etc/?
+root
+69) Erstelle den User chris mit einem Home-Verzechnis und füge ihn gleich der Gruppe praktikanten hinzu. (low level utility)
+useradd -m -G praktikanten chris
+70) In welchem Verzeichnis/ würdest du die ssh-config vermuten? (nicht vollständiger Pfad, gemäß FHS)
+/etc/
+71) In welchem Verzeichnis sind nach FHS standardmäßig ausführbare Dateien gespeichert? (Ubuntu, exklusive Verlinkungen)
+/usr/
+72) Mit welchem Befehl werden die Paketlisten neu eingelesen? (Ubuntu/Debian)
+apt update
+73) Mit welchem Befehl werden installierte Pakete auf neue Versionen aktualisiert? (Ubuntu/Debian)
+apt upgrade
+74) Installiere das Programm htop. (Ubuntu/Debian)
+apt install htop
+75) Ändere deinen Hostname auf linux mittels command.
+hostnamectl set-hostname linux
+76) Sorge dafür, dass ntpd bei jedem Systemstart aktiv ist und starte ihn im gleichen Command.
+systemctl enable --now ntpd
+77) Stelle sicher, dass deine Systemzeit automatisch mittels ntp synchronisiert wird. (true=1)
+timedatectl set-ntp 1
+78) Deinstalliere nano mit allen Konfigurationsdateien. (Ubuntu/Debian)
+apt purge nano
+79) Mit welchem Command erstellt man persönliche Cronjobs?
+crontab -e
+80) Wo werden die persönlichen Cronjobs gespeichert? (Absoluter Pfad)
+/var/spool/cron/crontabs/
+81) In welche Datei kann man Cronjobs händisch eingeben? (Absoluter Pfad)
+/etc/crontab
+82) Wie kann man schauen, ob der Dienst sshd läuft?
+systemctl status sshd
+83) Mit welchem Command kann man sich eine Momentaufnahme der aktuell laufenden Prozesse in der sich derzeit befindenen Shell anzeigen lassen?
+ps
+84) Mit welchem Command sieht man die laufenden Prozesse in Echtzeit? (Programm standardmäßig auf Ubuntu vorinstalliert)
+top
+85) Mit welchem Command fragt man das systemd-Journal ab?
+journalctl
+86) Mit welchem Command wird das System sofort heruntergefahren?
+shutdown -h now
+87) Mit welchem Kurz-Command wird das System neugestartet?
+reboot
+88) Lösche den User joko inkl. Home-Verzeichnis. (low level utility)
+userdel -r joko
+89) Lösche die Gruppe rockylinux.
+groupdel rockylinux
+90) Wie heißt die Option beim find-Befehl, wenn man sich wegen der Groß- und Kleinschreibung unsicher ist? (ohne -)
+iname
+91) Mit welcher Option kann man beim grep-Befehl die Groß- und Kleinschreibung ignorieren? (ohne -)
+i
+92) Wie kann man Befehle auf der Command Line kombinieren, so dass spätere Befehle nur ausgeführt werden, wenn die vorhergehenden erfolgreich waren?
+&&
+93) Wie kann man Befehle auf der Command Line kombinieren, so dass sie jedenfalls nacheinander abgearbeitet werden, ob erfolgreich ausgeführt oder nicht?
+;
+94) Mit welchem Zusatz kann man Befehle im Hintergrund ausführen lassen?
+&
+95) Mit welchem Zusatz kann man Befehle weiter ausführen lassen, auch wenn die eigene Shell geschlossen wird?
+nohup
+96) Mit welchem Command erstellt man MBR-Partitionen auf dem Datenträger /dev/vdc?
+fdisk /dev/vdc
+97) Mit welchem Command erstellt man ein ext4-Dateisystem auf der Partition /dev/vdc1?
+mkfs.ext4 /dev/vdc1
+98) Wie mountet man die Partition /dev/vdc1 auf Ordner /mnt/backup/?
+mount /dev/vdc1 /mnt/backup/
+99) Wie unmounte ich den Ordner /mnt/backup/?
+umount /mnt/backup/
+100) Wie mountet man alles aus fstab?
+mount -a
+101) Welche Datei ist zu bearbeiten, um Datenträger bei Neustart automatisch einbinden zu lassen?
+fstab
+102) Wie schaut der Command aus, um die Partition /dev/vdc1 als Physical Volume dem Logical Volume Manager verfügbar zu machen?
+pvcreate /dev/vdc1
+103) Muss pvcreate angewandt werden, bevor das Dateisystem (zB ext4) erstellt wird? (j/n)
+j
+104) Wie erstellt man die Volume Group storage für die Phsyical Volumes /dev/vdc1 und /dev/vdc2?
+vgcreate storage /dev/vdc1 /dev/vdc2
+105) Wie kann man sich alle Physical Volumes detailliert anzeigen lassen?
+pvdisplay
+106) Wie kann man sich alle Volume Groups detailliert anzeigen lassen?
+vgdisplay
+107) Erstelle ein Logical Volume mit 20GB. Die Volume Group ist storage und das Logical Volume soll backup heißen.
+lvcreate -L 20G -n backup storage
+108) Wie kann man sich alle Logical Volumes detailliert anzeigen lassen?
+lvdisplay
+109) Was ist der Vorteil des Logical Volume Managers gegenüber herkömmlichen Partitionen? (Mehrere Antworten können richtig sein. Sie sind direkt hinter einander einzugeben: ZB abcd)      a) LVM sind in ihrer Größe flexibel.      b) LVM sind moderner und werden daher von allen Linux-Versionen unterstützt.      c) Zwischen LVM und herkömmlichen Partitionen gibt es keinen nennenswerten Unterschied.      d) LVM ermöglichen den Einsatz von snapshots.
+ad
+110) Beende den Prozess 1745 mittels regulären Command.
+kill 1745
+111) Führe beim Prozess 3714 mittels Command eine harte Beendigung durch. (Kein numerischer Wert)
+kill -SIGKILL 3714
+112) Zeige den Inhalt des aktuellen Ordners an, aber formatiere die Dateigrößen lesbarer um (inkl. K, M etc.)
+ls -lh
+113) Mit welchem Command macht man eine Variable Shell-übergreifend verfügbar?
+export
+114) Mit welchem Command kann man sich alle Umgebungsvariablen anzeigen lassen?
+env
+115) Mit welchem Command kann man Variablen lösen, so dass sie nicht mehr aufrufbar sind?
+unset
+116) Mit welchem Command kann man im Hintergrund der derzeitigen Shell befindliche Programme anzeigen lassen?
+jobs
+117) Mithilfe welchen Befehls kann man sich die Prozessnummer der Shell, in welcher man sich gerade befindet, ausgeben lassen? (Wenn man zuhäufig bash eingegeben hat)
+ps -p$$
+118) Mit welchem der folgenden Befehle kann man einen spezifischen Datenträger mit Angabe des Geräteverzeichnisses entbinden? (1=unmount,2=umount)
+2
+119) In welchem File (absoluter Pfad) kann man für einen einzelnen User die standardmäßig aufgerufene Shell festlegen? 
+/etc/passwd
+120) Mit welchem Befehl erfährst du, wer gerade am Server eingeloggt ist? 
+w
+121) Welches Zeichen wird einer Variable vorangestellt, um sie von der Shell aufgerufen zu werden? 
+$
+122) Ist die IP4-Adresse des Localhosts auf Elenas VM die selbe wie auf Tristans VM? (y/n)
+y
+123) Ordne die folgenden Punkte im LVM hierachisch, ausgehend vom Datenträger (Zahlen direkt hintereinander schreiben, zB 123): volume group (1), physical volume (2), logical volume (3)
+213
+124) Lösche die physical volume /dev/sdd2.
+pvremove /dev/sdd2
+125) Füge der volume group storage die zusätzliche Physical Volume /dev/sdd2 hinzu.
+vgextend storage /dev/sdd2
+126) Wenn die volume group storage um die zusätzliche Ressource /dev/sdd2 erweitert wird, /dev/sdd2 aber noch nicht mittels pvcreate bearbeitet wurde: Funktioniert dann vgextend? (j/n)
+j
+127) Verkleiner die volume group storage um die physical volumes /dev/sdd1 und /dev/sdd2
+vgreduce storage /dev/sdd1 /dev/sdd2
+128) Lösche die volume group storage.
+vgremove storage
+129) Müssen alle logical volumes das gleiche Filesystem haben? (j/n)
+n
+130) "Was" mountest du auf den Ordner /mnt/backup:      a) Physical Volumes      b) Volume Groups      c) Logical Volumes
+c
+131) Wenn Daten vor dem Mount bereits im Mount-Ordner waren, sind diese dann nach dem Mount noch verfügbar? (j/n)
+n
+132) Werden in einem Ordner bestehende Daten durch mounten eines Datenträger an diesem Ordner gelöscht? (j/n)
+n
+133) Wo findet sich die logical volume backup der volume group storage im Dateisystem (absoluter Pfad).
+/dev/storage/backup
+134) Wann spielt man das Dateisystem im LVM auf. Nach dem Erstellen von (1, 2 oder 3 eingeben):     1) physical volumes     2) volume groups     3) logical volumes
+3
+135) Von was hängt die maximale Größe einer logical volume ab?
+volume group
+136) Vergrößer das logical volume backup der volumne group storage um 5GB.
+lvextend -L +5G storage/backup
+137) Welchen Command braucht man nach vergrößern des logical volumes bei einem ext4-Dateisystem?
+resize2fs
+138) Entferne das logical volume backup der volume group storage.
+lvremove storage/backup
+139) Mit welchem Befehl kann man ausgeben lassen, wie oft 'linux' in der Datei fragenkatalog vorkommt?
+grep -c 'linux' fragenkatalog
+140) Ordne die Datei laufzeit nach der Zahl der Runden, die in Spalte 2 stehen. (Reihe die Optionen alphabetisch und verzichte auf alle nicht benötigten Leerzeichen ; ))
+sort -k2 -n laufzeit
+141) Gib die Reihenfolge wieder, in der der LVM aufgesetzt wird (zB 12345):      1) mount      2) logical volume      3) volume group      4) physical volume      5) Dateisystem
+43251
+142) In welcher Datei steht der hostname? (absoluter Pfad)
+/etc/hostname
+143) In welcher Datei steht standardmäßig das Betriebssystem? (absoluter Pfad)
+/etc/os-release
+144) Wie sieht man im systemd-Journal alle Einträge seit dem letzten Boot?
+journalctl -b 
+145) Wie sieht man im systemd-Journal alle Einträge des Kernels?
+journalctl -k
+146) Wie kann man im systemd-Journal alle Einträge von sshd anzeigen lassen?
+journalctl -u sshd
+147) Gib im systemd-Journal alle Einträge ab heute 0:00 Uhr aus. (Option in Langform)
+journalctl --since 'today'
+148) Zeige im systemd-Journal die heutigen Einträge ab 15 Uhr an. (Option in Langform)
+journalctl --since '15:00'
+149) Zeige die ntpd-logs des systemd-Journals von gestern an. (Zeit-Option in Langform)
+journalctl -u ntpd --since 'yesterday'
+150) Zeige die Einträge des systemd-Journals zwischen 15 Uhr und 15:30 Uhr an. (Zeit-Option in Langform)
+journalctl --since '15:00' --until '15:30'
+151) Wie kann man sich kompakt alle Datenträger und Partitionen anzeigen lassen? (Angelehnt an ls)
+lsblk
+152) Wie kann man sich mit lsblk das Dateisystem anzeigen lassen?
+lsblk -f
+153) Stoppe den Service ntpd in einem Command.
+systemctl stop ntpd
+154) Starte den Service sshd neu.
+systemctl restart sshd
+155) Wie schaut die Reihenfolge aus, wenn einer logical volume mehr Speicherplatz gegeben werden soll. Die volume group ist ausgeschöpft. (Antwort zB 12345):      1) pvcreate      2) vgextend      3) physische Festplatte dem System verfügbar machen      4) resize2fs (bei ext4) xfs_growfs (bei xfs)      5) lvextend
+31254
+156) Wie kann man mit einem Command kontrollieren, ob der User tux existiert?
+id tux
+157) Wenn in deinem eigenen Standard-Home-Verzeichnis die Eigentumsverhältnisse einer Datei auf root geändert werden und Other nur Read-Rechte hat: Kann dein User (nicht root) diese Datei dann löschen? (j/n)
+j
+158) Mit welchem Command kann man sich anzeigen lassen, wie viel freier Speicherplatz auf den jeweiligen Festplatten noch vorhanden ist. Der Speicherplatz soll in MB, GB etc angegeben werden.
+df -h
+159) Wann kann ein User bei seiner eigenen Datei den Gruppen-Eigentümer ändern (mittels chown oder chgrp) (Als Antwort nur die Zahl eingeben)?      1) Immer      2) Nur, wenn der User Mitglied in der neuen Gruppe ist.      3) Nie ohne sudo
+2
+160) Wann kann ein User bei seiner eigenen Datei den User-Eigentümer ändern? (Als Antwort nur die Zahl eingeben)      1) Immer      2) Nie ohne sudo      3) Nur wenn der User-Eigentümer rwx-Rechte hat
+2
+161) Auf welche Dateien kann ein User chmod anwenden - ohne sudo (Als Antwort nur die Zahl eingeben)?      1) Alle      2) Wo er Teil des Gruppen-Eigentümers ist      3) Wo er User-Eigentümer ist
+3
+162) Wenn ein User bei seinem Home-Ordner den Gruppen-Eigentümer ändert, erfolgt diese Rechte-Änderung dann automatisch auch in den Unterordnern? (j/n)
+n
+163) Erstellt ein User in seinem Home-Verzeichnis eine Datei immer mit den gleichen Rechten wie sie der darüber geordnete Ordner vorsieht? (j/n)
+n
