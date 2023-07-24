@@ -2,7 +2,7 @@
 
 # ------------- SKRIPT-BESCHREIBUNG --------------
 # tutorBot liest Fragen und Antworten aus einer externen Datei
-# (Standard: /usr/Bin/fragenkatalog) jeweils in eigene Arrays ein
+# (Standard: /usr/bin/fragenkatalog) jeweils in eigene Arrays ein
 # und stellt in Folge dem Nutzer alle eingelesenen Fragen in einer zufälligen Reihenfolge.
 # Die so dann angefragte Eingabe des Nutzers wird mit dem jeweiligen
 # Antwort-Array verglichen.
@@ -27,10 +27,29 @@ clear
 # Default ist der Fragenkatalog unter /usr/bin/fragenkatalog gespeichert.
 
 
+echo "(1) Linux-Fragenkatalog oder (2) Netzwerk-Fragenkatalog? (Standard: Netzwerk-Fragenkatalog)"
+read input
+
+if [ "$input" = "1" ]
+then
+	SWITCH="linux"
+else
+	SWITCH="net"
+fi
+
 user="$(whoami)"
-file=/home/"$user"/fragenkatalog
-repeatFile=/home/"$user"/fragen_wiederholen
-sdFile="/usr/bin/fragenkatalog"
+
+if [ "$SWITCH" = "linux" ]
+then
+	file=/home/"$user"/fragenkatalog_own
+	repeatFile=/home/"$user"/fragen_wiederholen
+	sdFile="/usr/bin/fragenkatalog"
+else
+	file=/home/"$user"/fragenkatalog_net_own
+	repeatFile=/home/"$user"/fragen_net_wiederholen
+	sdFile="/usr/bin/fragenkatalog_net"
+fi
+
 fragenkatalog="$sdFile"
 
 if [ -e "$file" ] && [ -e "$repeatFile" ]
@@ -108,23 +127,34 @@ do
 	
 	if [ "$solvedArrLength" == "$qArrLength" ]
 	then
-		echo "Alle Fragen beantwortet. Vielen Dank fürs Spielen!"
+		echo "Alle Fragen beantwortet."
+		echo "Du hast $answeredQ Versuche gebraucht, um $qArrLength Fragen richtig zu beantworten."
+		echo "Vielen Dank fürs Spielen!"
 		break 2
 	fi
-	
-	echo	" -----------------------------------------------------------------------------------------------------------------------------"
-	echo -e " | \033[43m\e[1;31m WICHTIG! \e[0m\033[40m                                                                                                                |"
-	echo -e " | Gehe immer von \e[1;31mRELATIVEN PFADEN\e[0m aus. Außer in der Frage steht explizit etwas anderes.                                     |"
-	echo -e " | Wenn du Anführungszeichen verwendest, nimm immer die \e[1;31mEINFACHEN ANFÜHRUNGSZEICHEN (' ')\e[0m.                                   |"
-	echo -e " | \e[1;31mPARAMETER\e[0m wie Suchbegriffe oder zu verarbeitende Strings bitte immer in \e[1;31mEINFACHE ANFÜHRUNGSZEICHEN (' ')\e[0m setzen.          |"
-	echo -e " | Wenn bei Befehlen \e[1;31mOPTIONEN\e[0m einzugeben sind, dann sind diese zusammenzuschreiben. Z.B. \e[1;31mls -laF\e[0m.                            |"
-	echo -e " | \e[1;31mORDNER\e[0m immer mit einem \e[1;31mSLASH ( / )\e[0m am Ende eingeben.                                                                      |"
-	echo -e " | \e[1;31mSUDO\e[0m ist nur einzugeben, wenn direkt danach gefragt ist.                                                                  |"
-	echo -e	" | Mit \e[1;36mSAVEEXIT\e[0m werden die nicht gelösten Fragen in das Home-Verzeichnis des ausführenden Nutzers (\033[43m\e[1;31mnicht root\e[0m\033[40m) \e[1;31mÜBERSCHRIEBEN\e[0m.|"
-	echo -e " | Beim nächsten Programmstart wird dann gefragt, ob mit diesem Fragenkatalog gespielt werden soll.                          |"
-	echo -e " -----------------------------------------------------------------------------------------------------------------------------"
-	echo -e "\n"
 
+	if [ "$SWITCH" = "linux" ]
+	then	
+		echo	" -----------------------------------------------------------------------------------------------------------------------------"
+		echo -e " | \033[43m\e[1;31m WICHTIG! \e[0m\033[40m                                                                                                                |"
+		echo -e " | Gehe immer von \e[1;31mRELATIVEN PFADEN\e[0m aus. Außer in der Frage steht explizit etwas anderes.                                     |"
+		echo -e " | Wenn du Anführungszeichen verwendest, nimm immer die \e[1;31mEINFACHEN ANFÜHRUNGSZEICHEN (' ')\e[0m.                                   |"
+		echo -e " | \e[1;31mPARAMETER\e[0m wie Suchbegriffe oder zu verarbeitende Strings bitte immer in \e[1;31mEINFACHE ANFÜHRUNGSZEICHEN (' ')\e[0m setzen.          |"
+		echo -e " | Wenn bei Befehlen \e[1;31mOPTIONEN\e[0m einzugeben sind, dann sind diese zusammenzuschreiben. Z.B. \e[1;31mls -laF\e[0m.                            |"
+		echo -e " | \e[1;31mORDNER\e[0m immer mit einem \e[1;31mSLASH ( / )\e[0m am Ende eingeben.                                                                      |"
+		echo -e " | \e[1;31mSUDO\e[0m ist nur einzugeben, wenn direkt danach gefragt ist.                                                                  |"
+		echo -e	" | Mit \e[1;36mSAVEEXIT\e[0m werden die nicht gelösten Fragen in das Home-Verzeichnis des ausführenden Nutzers (\033[43m\e[1;31mnicht root\e[0m\033[40m) \e[1;31mÜBERSCHRIEBEN\e[0m.|"
+		echo -e " | Beim nächsten Programmstart wird dann gefragt, ob mit diesem Fragenkatalog gespielt werden soll.                          |"
+		echo -e " -----------------------------------------------------------------------------------------------------------------------------"
+		echo -e "\n"
+	else
+		echo	" -----------------------------------------------------------------------------------------------------------------------------"
+		echo -e " | Antworten sind im Zweifel \e[1;31mKLEIN ZU SCHREIBEN\e[0m. (Außer Abkürzungen)                                                         |"
+		echo -e	" | Mit \e[1;36mSAVEEXIT\e[0m werden die nicht gelösten Fragen in das Home-Verzeichnis des ausführenden Nutzers (\033[43m\e[1;31mnicht root\e[0m\033[40m) \e[1;31mÜBERSCHRIEBEN\e[0m.|"
+		echo -e " | Beim nächsten Programmstart wird dann gefragt, ob mit diesem Fragenkatalog gespielt werden soll.                          |"
+		echo -e " -----------------------------------------------------------------------------------------------------------------------------"
+	fi
+	
 	echo "Anzahl aller Fragen: $qArrLength"
 	echo "Anzahl beantworteter Fragen: $answeredQ"
 	echo "Richtig beantwortete Fragen: $solvedArrLength"

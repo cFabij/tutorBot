@@ -1,0 +1,156 @@
+1) Wie viele Bit hat eine IPv4-Adresse?
+32
+2) Wie viele Oktetten hat eine IPv4-Adresse?
+4
+3) Wie viele Bit sind in einer Oktette?
+8
+4) Wie viele Bit hat eine IPv6-Adresse?
+128
+5) In welchem Format schreibt man IPv4-Adressen?
+dezimal
+6) In welchem Format schreibt man IPv6-Adressen?
+hexadezimal
+7) Wie viele Blöcke gibt es in einer IPv6-Adresse?
+8
+8) Wie viele Bits stehen in einem Block einer IPv6-Adresse?
+16
+9) Wie ist eine IPv4-Adresse inhaltlich aufgeteilt:     a) Netz- und Subnetzanteil     b) Netz- und Hostanteil     c) Private und public Anteil
+b
+10) Wie viele Layer hat das OSI-Modell?
+7
+11) Wie heißt der 7. Layer im OSI-Modell?
+application
+12) Wie heißt der 6. Layer im OSI-Modell?
+presentation
+13) Wie heißt der 5. Layer im OSI-Modell?
+session
+14) Wie heißt der 4. Layer im OSI-Modell?
+transport
+15) Wie heißt der 3. Layer im OSI-Modell?
+network
+16) Wie heißt der 2. Layer im OSI-Modell?
+data link
+17) Wie heißt der 1. Layer im OSI-Modell?
+physical
+18) Wie heißt die PDU auf Layer 3 im OSI-Modell?
+packet
+19) Wie heißt die PDU auf Layer 2 im OSI-Modell?
+frame
+20) Wie heißt die PDU auf Layer 1 im OSI-Modell?
+bit
+21) Wie heißt die PDU auf Layer 4 im OSI-Modell, wenn TCP verwendet wird?
+segment
+22) Wie heißt die PDU auf Layer 4 im OSI-Modell, wenn UDP verwendet wird?
+datagram
+23) Auf welchem Layer im OSI-Modell operiert der ping-command?
+3
+24) Auf welchem Layer im OSI-Modell operieren TCP und UDP?
+4
+25) Auf welchem Layer im OSI-Modell werden MAC-Adressen hinzugefügt?
+2
+26) Auf welchem Layer im OSI-Modell werden IP-Adressen hinzugefügt?
+3
+27) Welches Netzwerkgerät operiert klassisch auf Layer 2 des OSI-Modells?
+switch
+28) Welches Netzwerkgerät operiert klassisch auf Layer 3 des OSI-Modells?
+router
+29) Woher weiß ein Host, welche MAC-Adresse zu der IP-Adresse gehört?
+ARP cache
+30) Mittels welchem Protokoll kann ein Host herausfinden, welche MAC-Adresse zu einer IP-Adresse gehört?
+ARP
+31) Ein Host schickt einen HTTPS-Request über einen Switch an seinen Default Gateway, der das Paket weiter routet. Schreibe je angeführter node den jeweils höchsten OSI-Layer auf (zB 317).
+723
+32) Woher weiß ein Switch, welche MAC-Adresse an welchem Port hängt?
+MAC address table
+33) Was macht ein Switch, wenn er die Destination MAC-Adresse aus einem Frame keinen Port zuweisen kann? a) Schickt das Frame auf allen Ports aus.     b) Dropt das Frame.      c) Schickt das Frame auf allen Ports, außer dem eingehenden Port aus.
+c
+34) Auf welchem Layer im OSI-Modell kommt es zu einer Verschlüsselung?
+6
+35) Welches Protokoll arbeitet mit ARQ?
+TCP
+36) Wie heißt der Ort, wo auf Layer 4-2 Daten hinzugefügt werden?
+header
+37) Wie lernt ein Switch seine MAC Address Table? a) Durch ARP-Request.     b) Durch Lesen der Source MAC Address bei eingehenden Frames.    c) In dem er Broadcasts aussendet.     d) Durch Lesen der Destination MAC Address bei eingehenden Frames.
+b
+38) Durch welchen Anteil an der IP-Adresse erkennt ein Client, ob die IP-Adresse im eigenen Netzwerk liegt?
+netzanteil
+39) Welches Netzwerkgerät verbindet klassischerweise verschiedene Netzwerke?
+router
+40) Auf was für einer Basis erfolgt die Error Detection auf Layer 2?
+checksum
+41) Wo steht die Error Detection auf Layer 2?
+trailer
+42) Werden nur bei TCP Daten segmentiert und nicht bei UDP? (j/n)
+n
+43) Was steht neben der sequence number noch im header aus dem Transport-Layer?
+port number
+44) Wie heißt der Mechanismus des Verbindungsaufbaus bei TCP? (alle Wörter mit Bindestrich verbinden)
+three-way-handshake
+45) Auf welchem Layer im OSI-Modell befindet sich die Network Interface Card?
+1
+46) Auf welchem Layer im OSI-Modell findet das Routing statt?
+3
+47) An welche MAC-Adresse schickt der Client das Frame, wenn die IP-Adresse nicht im eigenen Netzwerk liegt?
+default gateway
+48) [WINDOWS/LINUX] Mit welchem Command kann man sich auf den ARP cache anzeigen lassen?
+arp -a
+49) Mit welchem Command kann man auf Windows den ARP cache löschen?
+arp -d
+50) Welches Netzwerkprotokoll stellt durch seine Funktion die Grundlage des Internets dar?
+IP
+51) Würde man für einen Download eher TCP oder UDP verwenden?
+TCP
+52) Würde man zum Streamen eher TCP oder UDP verwenden?
+UDP
+53) Muss vor Übertragung mittels UDP eine Verbindung aufgebaut werden? (j/n)
+n
+54) Muss bei UDP immer ein Source Port angegeben werden? (j/n)
+n
+55) Können bei UDP fehlerhaft übertragene Datagramme erkannt und verworfen werden? (j/n)
+j
+56) Was ist die Maximum Transmission Unit im Ethernet-Protokoll in Bytes?
+1500
+57) Aus wie vielen Bits besteht die MAC-Adresse?
+48
+58) Wie viele Blöcke hat eine MAC-Adresse?
+6
+59) In welchem Format schreibt man die MAC-Adresse?
+hexadezimal
+60) In einem Peer-to-Peer-Network aus zwei Hosts überträgt der eine mittels FTP dem anderem Host eine Datei. Schreibe den jeweils höchsten OSI-Layer auf, den jede erwähnte node erreicht (zB 45)
+77
+61) In einem Peer-to-Peer-Network aus zwei Hosts testet der eine Host mittels ping-Command, ob er den anderen erreicht. Schreibe den jeweils höchsten OSI-Layer aus, den jede erwähnte node erreicht (gemäß Packet Tracer, zB 77)
+33
+62) In einem lokalen Netzwerk pingt Host1 über einen Switch Host2 an. Schreibe den jeweils höchsten OSI-Layer auf, den jede erwähnte node erreicht (zB 737)
+323
+63) Wie heißen die Pakete beim Verbindungsaufbau mittels TCP in der richtigen Reigenfolge? a) SYN SYN/ACK ACK     b) SYN ACK/SYN SYN     c) FIN ACK FIN ACK
+a
+64) [WINDOWS] Mittels welchem Command in kann man die Anzahl der hops zur Destination-IP feststellen?
+tracert
+65) [LINUX] Mit welchem Command kann man die Anzahl der hops zur Destination-IP feststellen?
+traceroute
+66) [WINDOWS/LINUX] Mit welchem Command kann man sich die IP-Adresse zu einem Domain Name (und umgekehrt) anzeigen lassen?
+nslookup
+67) [WINDOWS] Mit welchem Command kann man sich die IP-Adressen inkl. MAC-Adressen anzeigen lassen?
+ipconfig /all
+68) [LINUX] Mit welchem Command kann man sich die IP-Adressen inkl. MAC-Adressen anzeigen lassen? (aktueller Command)
+ip addr
+69) [WINDOWS] Mit welchem Command kann man sich die lokal gespeicherte IP routing table anzeigen lassen?
+route print
+70) [LINUX] Mit welchem Command kann man sich die lokal gespeicherte IP routing table anzeigen lassen? (aktueller Command)
+ip route
+71) Kann ein Host gleichzeitig mehrere MAC-Adressen besitzen? (j/n)
+j
+72) Kann ein Host gleichzeitig mehrere IP-Adressen besitzen? (j/n)
+n
+73) Welche der folgenden IP-Adressen ist eine private IP-Adresse: a) 10.0.0.0/24     b) 176.12.0.0/12     c) 127.0.0.0/24     d) 192.168.0.0/8
+a
+74) Ein HTTPS-Request wird mittels TCP gestellt und die MAC-Adresse des Default Gateways ist unbekannt. In welcher Reihenfolge werden die entsprechenden Protokolle abgearbeitet: a) HTTPS-TCP-ARP     b) TCP-HTTPS-ARP      c) ARP-TCP-HTTPS
+c
+75) Was ermöglicht unter anderem die gleichzeitige Verwendung einer öffentlichen IP-Adresse durch mehrere Hosts?
+NAT
+76) Kann ein Router gleichzeitig mehrere IP-Adressen besitzen? (j/n)
+j
+77) Was ist der Command auf der Cisco Command Line, um sich die Routing-Tabelle des Routers anzeigen zu lassen?
+show ip route
+78) Was ist der Command auf der Cisco Command Line, um sich die MAC Address Table des Switchs anzeigen zu lassen?
+show mac-address-table
