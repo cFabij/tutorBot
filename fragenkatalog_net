@@ -154,3 +154,77 @@ j
 show ip route
 78) Was ist der Command auf der Cisco Command Line, um sich die MAC Address Table des Switchs anzeigen zu lassen?
 show mac-address-table
+79) [WINDOWS] Mit welchem Command erhält man eine neue IP-Adresse (via DHCP)?
+ipconfig /renew
+80) [CISCO] Mit welchem Befehl zeigt man am Router den ARP cache an?
+show arp
+81) Wie viele IP-Adressen hat ein Router, der mit zwei Switches aus verschiedenen Subnetzen und einem Router verbunden ist, an dem ein weiteres anderes Subnetz hängt?
+3
+82) Was ist die Standard Network-Destination in der Routing-Tabelle, wenn man ins Internet hinaus will?
+0.0.0.0
+83) Welche Subnet Mask hat die Network-Destination 0.0.0.0 in der Routing-Tabelle?
+0.0.0.0
+84) Welche drei IP-Adressen sind beim Static Routing anzugeben? a) Network Destination, Subnet Mask, Next Hob     b) Destination IPv4, Subnet Mask, Default Gateway     c) Broadcast IP, Subnet Mask, IP-Adresse des Routers
+a
+85) In wie vielen Netzwerken befindet sich ein Router, der mit zwei Switches aus verschiedenen Subnetzen und einem Router verbunden ist, an dem ein weiteres anderes Subnetz hängt?
+3
+86) Wozu benötigt man DNS? (Auf Computer Netzwerke bezogen ; ))  a) 'Übersetzt' domain names in IP-Adressen (und vice versa)     b) Verteilt IP-Adressen an Client gemäß des eingestellten Pools.     c) Routing-Protokoll zwischen Client und DNS-Server
+a
+87) Mittels welchen Protokolls lassen sich allgemeine Informationen wie Default Gateway und DNS-Server-IP-Adresse am einfachsten an alle Clients verteilen?
+dhcp
+88) Was wird auch als physische Adresse bezeichnet? (Nur das Akronym angeben)
+MAC
+89) Was wird auch als logische Adresse bezeichnet? (Nur das Akronym angeben)
+IP
+90) Bei Unterteilung eines Netzwerks in verschiedene Subnetze: Müssen die Subnetze alle gleich groß sein? (j/n)
+n
+91) Wie viele /10-Subnetze passen in ein /8-Subnetz?
+4
+92) Passen 2 /27-Subnetze, 2 /29-Subnetze und 1 /30-Subnetz in 1 /25-Subnetz? (j/n)
+j
+93) Auf welcher IP-Adresse sendet der Client die DHCP-Discover-Message aus?
+255.255.255.255
+94) Wie läuft der DHCP-Prozess ab? a) Discover-Request-Offer-ACK     b) Discover-Offer-Request-ACK
+b
+95) Fragt der DHCP-Client vor Erhalt der IP-Adresse mittels ARP ab, ob die IP-Adresse bereits vergeben ist? (j/n)
+j
+96) Welcher DNS-Record wird für IPv4-Adressen verwendet?
+A
+97) Welcher DNS-Record wird für IPv6-Adressen verwendet?
+AAAA
+98) Auf welchem Protokoll baut QUIC auf?
+UDP
+99) Versendet QUIC Daten standardmäßig verschlüsselt? (j/n)
+j
+100) Sind Daten beim Versand via TCP und UDP immer verschlüsselt? (j/n)
+n
+101) Wenn auf einem Server gleichzeitig ein Web-Server, ein DHCP-Server und ein DNS-Server laufen: Womit wird sichergestellt, dass die Daten bei der richtigen Application ankommen? (plural)
+ports
+102) Auf welchem Layer des OSI-Modells wirkt NAT?
+3
+103) Wenn ein Router mit einem anderen Router zu einem anderen Subnetz verbunden ist, besteht dann zwischen diesen beiden Routern ein eigenes Subnetz? (j/n)
+j
+104) Kann die NetID 8.19.8.0 mit Subnet Mask 255.255.0.0 zusammenstimmen? (j/n)
+n
+105) Worin speichert der Router unter anderem IP-Adressen, Protokolle, Ports der NAT-Session?
+NAT-Table
+106) Wo schaut der Router nach, welchem Client er die eingehenden Paketen an der public IP-Adresse weiterschicken soll?
+NAT-Table
+107) Wann kommt es zur Löschung eines Eintrages der NAT-Table? a) Neustart des Clients     b) Aufbau einer neuen Verbindung     c) Ablauf der dazugehörigen Session
+c
+108) In was wird NAT unterschieden: a) IP- und MAC-NAT     b) Source- und Destination-NAT     c) LAN- und WAN-NAT
+b
+109) Sind private IP-Adressen routbar? (j/n)
+n
+110) Welches Source-NAT wird klassisch verwendet? a) Static NAT     b) Dynamic Nat     c) NAT mit PAT
+c
+111) Wenn ein Router mit anderen privaten Subnetzen verbunden ist, kommt es dann an der Schnittstelle zwischen Subnetzen zum Einsatz von NAT? (j/n)
+n
+112) Ein Router hat folgende IP-Adressen a) 192.168.0.1 und b) 82.169.136.60. Welche IP-Adresse ist gemäß Source-NAT die inside global?
+b
+113) Ein Router hat folgende IP-Adressen a) 192.168.0.1 und b) 82.169.136.60. Welche IP-Adresse ist gemäß Source-NAT die inside local?
+a
+114) Wenn ich mittels Static Source-NAT 3 lokale Clients im Internet verfügbar machen will, wie viele public IP-Adressen benötige ich dann?
+3
+115) Was macht der Router bei PAT (Source-NAT mit PAT) in der NAT-Table? a) Übernimmt den zufälligen Client Source-Port als Port.     b) Wählt den well-known-Port als Port aus.     c) Vergibt einen eigenen Port, unabhängig vom zufälligen Client Source-Port, als Port.
+c
