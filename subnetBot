@@ -1,0 +1,419 @@
+#!/bin/bash
+
+errorChecks () {
+	input="$1"
+	count=0
+	checkFail=false
+
+	IFS="." read -a addr <<< "$input"
+	for element in "${addr[@]}"
+	do
+		
+		if [ "${#element[@]}" -gt 3 ]
+		then
+			checkFail=true
+		elif [ "$element" -gt 255 ]
+		then
+			checkFail=true
+		fi
+		
+		arr["$count"]="$element"
+		let "count++"
+
+	done
+
+	if [ "$count" -eq 5 ]
+	then
+		checkFail=true
+	elif [ "$count" -lt 4 ]
+	then
+		checkFail=true
+	fi	
+
+	stringArr=("${arr[@]}")
+}
+
+calcSubnet () {
+	subnetID="$1"
+	subnetMask=()
+	countIndex=0
+	binarySum=0
+
+	fullOcto=$(( $subnetID / 8 ))
+	
+	rest=$(( $subnetID - (8 * $fullOcto) ))
+
+	for (( i=0; i<$fullOcto; i++ ))
+	do
+		subnetMask[$i]=255
+		let "countIndex++"
+	done
+
+	if [ "$countIndex" -lt 4 ]
+	then
+		for (( i=0; i<$rest; i++ ))
+		do
+			binary=$(( 2**(7 - $i) ))
+			binarySum=$(( $binary + $binarySum ))
+
+		done
+
+		subnetMask[$countIndex]=$binarySum
+
+		emptyOcto=$(( 4 - $countIndex ))
+
+		if [ "$emptyOcto" -gt 0 ]
+		then
+			for (( i=0; i<($emptyOcto-1); i++ ))
+			do
+				countIndex=$(( $countIndex + $i + 1 ))
+				subnetMask[$countIndex]=0
+			done
+		fi
+	fi
+	
+}
+
+calcCIDR () {
+	subnet=("$@")
+	CIDR=0
+
+	for element in "${subnet[@]}"
+	do
+		checkSum=0				
+		
+		while true
+		do
+			if [ "$element" -eq 255  ]
+			then
+				CIDR=$(( $CIDR + 8 ))
+				break
+			fi			
+
+			for (( i=7; i>=0; i-- ))
+			do
+				multiOP=$(( 2**$i ))
+				checkSum=$(( $checkSum + $multiOP ))
+	
+				if [ "$element" -eq "$checkSum" ]
+				then
+					CIDR=$(( $CIDR + $i ))
+					break 2
+				fi
+			done
+			
+			break
+		done
+	done
+}
+
+getPrivateIP () {
+
+	randomNumber=$(( $RANDOM % 3 + 1 ))
+
+	if [ "$randomNumber" -eq 1 ]
+	then
+		ipArr=(10 0 0 0)
+		randomSubnet=$(shuf -i 8-30 -n1)
+		randomOcto=3
+	elif [ "$randomNumber" -eq 2 ]
+	then
+		ipArr=(172 16 0 0)
+		randomIP=$(shuf -i 16-31 -n1)
+		ipArr[1]="$randomIP"
+		randomSubnet=$(shuf -i 12-30 -n1)
+		randomOcto=2
+	elif [ "$randomNumber" -eq 3 ]
+	then
+		ipArr=(192 168 0 0)
+		randomSubnet=$(shuf -i 16-30 -n1)
+		randomOcto=2
+	fi
+
+	for (( i=0; i<"$randomOcto"; i++ ))
+	do
+		index=$(( 3 - $i )) 
+		randomIP=$(( $RANDOM % 255 + 0 ))
+		ipArr[$index]="$randomIP"		
+	done
+
+	calcSubnet "$randomSubnet"	
+	subnetArr=("${subnetMask[@]}")
+
+	echo "Gegebene IPv4: 		${ipArr[@]}"
+	echo "Gegebenes Subnet: 	${subnetArr[@]}"
+}
+
+getUniqueIPs () {
+	count=0
+
+	for ipElement in "${ipArr[@]}"
+	do
+		if [ "${subnetArr[$count]}" -eq 255 ]
+		then
+			netID["$count"]="$ipElement"
+		elif [ "${subnetArr[$count]}" -eq 0 ]
+		then
+			netID["$count"]=0
+		else
+			magicNumber=$(( 256 - ${subnetArr[$count]} ))
+			multiple=$(( $ipElement / $magicNumber ))
+			netID["$count"]=$(( $magicNumber * $multiple ))
+		fi	
+	
+		let "count++"
+	done
+
+	count=0
+
+	for ipElement in "${netID[@]}"
+	do
+		if [ "${subnetArr[$count]}" -eq 255 ]
+		then
+			broadcastIP["$count"]="$ipElement"
+		elif [ "${subnetArr[$count]}" -eq 0 ]
+		then
+			broadcastIP["$count"]=255
+		else
+			broadcastIP["$count"]=$(( $magicNumber * ($multiple + 1) - 1 ))
+		fi	
+	
+		let "count++"
+	done
+
+	firstIP=("${netID[@]}")
+	firstIP[3]=$(( firstIP[3] + 1 ))
+
+	lastIP=("${broadcastIP[@]}")
+	lastIP[3]=$(( lastIP[3] - 1 ))
+}
+
+
+checkAnswer () {
+	input="$1"
+	answer="$2"
+	correct="false"
+
+
+	if [ "$input" = "$answer" ]
+	then
+		echo -e "\e[1;32mPERFEKT!\e[0m"
+		echo -e "\n"
+
+		sleep 1
+
+		correct="true"
+	else
+		echo -e "\033[43m\e[30m Leider nicht korrekt. \e[0m\033[40m"
+		echo -e "Gib \e[1;36m'n'\e[0m ein, um es nochmal zu versuchen. Oder gib \e[1;36m'l'\e[0m, um die Lösung anzuzeigen."
+
+		read -e input
+      		echo -e "\n"
+
+      		if [ ! "$input" == "n" ] && [ ! "$input" == "l" ]
+      		then
+            		correct="true"
+
+      		elif [ "$input" == "l" ]
+      		then
+               		echo -e "\n"
+        		echo -e "Die Antwort wäre gewesen: \033[42m\e[30m $answer \033[40m\e[0m"
+	      		echo -e "\n"
+              		echo "Drücke eine beliebige Taste, um fortzufahren."
+
+               		read -e input
+
+	       		correct="true"
+		fi
+	fi
+}
+
+correct="false"
+
+while true 
+do
+	echo "(1) Selber Subnet rechnen (Standard) oder (2) den Bot eins ausrechnen lassen?"
+	read input
+
+	clear
+
+	if [ "$input" = "2" ]
+	then
+		while true
+		do
+			echo "IPv4-Adresse eingeben: "
+
+			read -e ipInput
+	
+			errorChecks "$ipInput"
+	
+			if [ "$checkFail" = "true" ]
+			then
+				echo -e "\e[1;31mUngültige Adresse.\e[0m"
+			else
+				break
+			fi
+		done
+		
+		ipArr=("${arr[@]}")	
+	
+		echo -e "\n"
+	
+		while true
+		do
+			echo "Subnetzmaske oder CIDR-Notation (inkl. /) eingeben: "
+			read -e subnetInput
+	
+			if [[ ${subnetInput:0:1} == "/" ]]
+			then
+				cidr="${subnetInput:1:2}"
+			
+				if [ "$cidr" -gt 32 ]
+				then
+					echo -e "\e[1;31mFehlerhafte CIDR-Notation.\e[0m"
+				else
+					calcSubnet "$cidr"
+					subnetArr=("${subnetMask[@]}")
+					CIDRNotation="$subnetInput"
+					break
+				fi
+			else
+				errorChecks "$subnetInput"		
+				
+				if [ "$checkFail" = "true" ]
+				then
+					echo -e "\e[1;31mUngültige Adresse.\e[0m"
+				else
+					subnetArr=("${arr[@]}")
+					calcCIDR "${subnetArr[@]}"
+					CIDRNotation="/$CIDR"
+					break
+				fi
+			fi
+		done
+
+		getUniqueIPs
+	
+		echo -e "\n"
+		echo "IP-Adresse:	${ipArr[@]}"
+		echo "Subnet Mask:	${subnetArr[@]}"
+		echo "CIDR-Notation:	$CIDRNotation"
+		echo "NetID:		${netID[@]}"
+		echo "BroadcastIP:	${broadcastIP[@]}"
+		echo "First Host-IP:	${firstIP[@]}"
+		echo "Last Host-IP:	${lastIP[@]}"
+		echo -e "\n"
+
+		break
+	else
+		getPrivateIP
+		getUniqueIPs
+		
+		echo -e "\n"
+		
+		while true
+		do
+			while [ "$correct" = "false" ]
+			do
+				while true			
+				do
+					echo "Gebe die NetID an: "
+					read -e input
+
+					errorChecks "$input"
+	
+					if [ "$checkFail" = "true" ]
+					then
+						echo -e "\e[1;31mUngültige Adresse.\e[0m"
+					else
+						break
+					fi
+				done
+		
+				input=("${arr[*]}")
+				answer=("${netID[*]}")
+	
+				checkAnswer "$input" "$answer"
+			done
+
+			correct=false
+			
+			while [ "$correct" = "false" ]
+			do
+				while true			
+				do
+					echo "Gebe die Broadcast IP an: "
+					read -e input
+
+					errorChecks "$input"
+	
+					if [ "$checkFail" = "true" ]
+					then
+						echo -e "\e[1;31mUngültige Adresse.\e[0m"
+					else
+						break
+					fi
+				done
+		
+				input=("${arr[*]}")
+				answer=("${broadcastIP[*]}")
+	
+				checkAnswer "$input" "$answer"
+			done
+
+			correct=false			
+			
+			while [ "$correct" = "false" ]
+			do
+				while true			
+				do
+					echo "Gebe die First Host IP an: "
+					read -e input
+
+					errorChecks "$input"
+	
+					if [ "$checkFail" = "true" ]
+					then
+						echo -e "\e[1;31mUngültige Adresse.\e[0m"
+					else
+						break
+					fi
+				done
+		
+				input=("${arr[*]}")
+				answer=("${firstIP[*]}")
+	
+				checkAnswer "$input" "$answer"
+			done
+
+			correct=false
+			
+			while [ "$correct" = "false" ]
+			do
+				while true			
+				do
+					echo "Gebe die Last Host IP an: "
+					read -e input
+
+					errorChecks "$input"
+	
+					if [ "$checkFail" = "true" ]
+					then
+						echo -e "\e[1;31mUngültige Adresse.\e[0m"
+					else
+						break
+					fi
+				done
+		
+				input=("${arr[*]}")
+				answer=("${lastIP[*]}")
+	
+				checkAnswer "$input" "$answer"
+			done
+
+			correct=false
+			
+			break 2
+		done
+	fi
+done

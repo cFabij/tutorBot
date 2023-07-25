@@ -90,7 +90,7 @@ three-way-handshake
 1
 46) Auf welchem Layer im OSI-Modell findet das Routing statt?
 3
-47) An welche MAC-Adresse schickt der Client das Frame, wenn die IP-Adresse nicht im eigenen Netzwerk liegt?
+47) An die MAC-Adresse welchen Geräts schickt der Client das Frame, wenn die IP-Adresse nicht im eigenen Netzwerk liegt?
 default gateway
 48) [WINDOWS/LINUX] Mit welchem Command kann man sich auf den ARP cache anzeigen lassen?
 arp -a
@@ -141,7 +141,7 @@ ip route
 71) Kann ein Host gleichzeitig mehrere MAC-Adressen besitzen? (j/n)
 j
 72) Kann ein Host gleichzeitig mehrere IP-Adressen besitzen? (j/n)
-n
+j
 73) Welche der folgenden IP-Adressen ist eine private IP-Adresse: a) 10.0.0.0/24     b) 176.12.0.0/12     c) 127.0.0.0/24     d) 192.168.0.0/8
 a
 74) Ein HTTPS-Request wird mittels TCP gestellt und die MAC-Adresse des Default Gateways ist unbekannt. In welcher Reihenfolge werden die entsprechenden Protokolle abgearbeitet: a) HTTPS-TCP-ARP     b) TCP-HTTPS-ARP      c) ARP-TCP-HTTPS
