@@ -21,3 +21,9 @@ Bei erneutem Skript-Aufruf wird der User dann gefragt, ob er
 3) mit der ursprünglichen Datei fortfahren will.
 
 Der Fragenkatalog beinhaltet derzeit Grundlagen-Fragen zu Linux und Computer-Netzwerke.
+
+subnetBot ist ein Shell-Skript, das Subnetze ausrechnen kann und dem
+Nutzer auch private IPs samt Subnet Mask zum Selber rechnen gibt.
+
+Zum zweiten Fall ist die Möglichkeit der Eingabekontrolle und der
+Anzeige der Lösung vorgesehen.
