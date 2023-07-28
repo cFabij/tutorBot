@@ -142,7 +142,7 @@ ip route
 j
 72) Kann ein Host gleichzeitig mehrere IP-Adressen besitzen? (j/n)
 j
-73) Welche der folgenden IP-Adressen ist eine private IP-Adresse: a) 10.0.0.0/24     b) 176.12.0.0/12     c) 127.0.0.0/24     d) 192.168.0.0/8
+73) Welche der folgenden IP-Adressen ist eine private IP-Adresse gemäß RFC 1918: a) 10.0.0.0/24     b) 176.12.0.0/12     c) 127.0.0.0/24     d) 192.168.0.0/8
 a
 74) Ein HTTPS-Request wird mittels TCP gestellt und die MAC-Adresse des Default Gateways ist unbekannt. In welcher Reihenfolge werden die entsprechenden Protokolle abgearbeitet: a) HTTPS-TCP-ARP     b) TCP-HTTPS-ARP      c) ARP-TCP-HTTPS
 c
