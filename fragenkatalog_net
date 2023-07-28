@@ -171,7 +171,7 @@ a
 86) Wozu benötigt man DNS? (Auf Computer Netzwerke bezogen ; ))  a) 'Übersetzt' domain names in IP-Adressen (und vice versa)     b) Verteilt IP-Adressen an Client gemäß des eingestellten Pools.     c) Routing-Protokoll zwischen Client und DNS-Server
 a
 87) Mittels welchen Protokolls lassen sich allgemeine Informationen wie Default Gateway und DNS-Server-IP-Adresse am einfachsten an alle Clients verteilen?
-dhcp
+DHCP
 88) Was wird auch als physische Adresse bezeichnet? (Nur das Akronym angeben)
 MAC
 89) Was wird auch als logische Adresse bezeichnet? (Nur das Akronym angeben)
@@ -207,14 +207,14 @@ j
 104) Kann die NetID 8.19.8.0 mit Subnet Mask 255.255.0.0 zusammenstimmen? (j/n)
 n
 105) Worin speichert der Router unter anderem IP-Adressen, Protokolle, Ports der NAT-Session?
-NAT-Table
+NAT table
 106) Wo schaut der Router nach, welchem Client er die eingehenden Paketen an der public IP-Adresse weiterschicken soll?
-NAT-Table
+NAT table
 107) Wann kommt es zur Löschung eines Eintrages der NAT-Table? a) Neustart des Clients     b) Aufbau einer neuen Verbindung     c) Ablauf der dazugehörigen Session
 c
 108) In was wird NAT unterschieden: a) IP- und MAC-NAT     b) Source- und Destination-NAT     c) LAN- und WAN-NAT
 b
-109) Sind private IP-Adressen routbar? (j/n)
+109) Sind private IP-Adressen im Internet routbar? (j/n)
 n
 110) Welches Source-NAT wird klassisch verwendet? a) Static NAT     b) Dynamic Nat     c) NAT mit PAT
 c
@@ -228,3 +228,33 @@ a
 3
 115) Was macht der Router bei PAT (Source-NAT mit PAT) in der NAT-Table? a) Übernimmt den zufälligen Client Source-Port als Port.     b) Wählt den well-known-Port als Port aus.     c) Vergibt einen eigenen Port, unabhängig vom zufälligen Client Source-Port, als Port.
 c
+116) Kann grundsätzlich beim Destination NAT / Port Forwarding der gleiche Destination-Port auf zwei verschiedene private IP-Adressen eingerichtet werden? (j/n)
+n
+117) Was macht das Default Gateway, wenn es ein Paket eines Clients bekommt, aber die MAC-Adresse zur Destination-IP nicht weiß? (nur Akronym)
+ARP
+118) Können Static NAT, Dynamic NAT und Dynamic NAT mit PAT parallel eingerichtet werden? (j/n)
+j
+119) Welche Switch-Art verfügt über eine IP-Adresse?
+managed
+120) Welche Geräte verfügen über einen ARP cache? (mehrere Antworten möglich, alphabetisch anführen) a) Switch     b) Router     c) Laptop     d) Server
+bcd
+121) Welche Geräte verfügen über eine MAC Tabelle? a) PC     b) Server     c) Switch     d) Router
+c
+122) Welche Geräte verfügen über eine Routing Tabelle? (mehrere Antworten möglich, alphabetisch anführen) a) Switch     b) Router     c) Laptop     d) Server
+bcd
+123) Verfügt jedes Gerät, das einen ARP cache hat, auch über eine Routing Tabelle? (j/n)
+j
+124) Welche Geräte können einen ARP request ausschicken? (mehrere Antworten möglich, aphabetisch anführen) a) Switch     b) Router     c) Laptop     d) Server
+bcd
+125) Wenn ein Switch den Port zur MAC-Adresse nicht weiß, verwendet er dann die Broadcast-MAC-Adresse, um das frame auf allen, außer dem eingehenden Port auszusenden? (j/n)
+n
+126) Wird mittels ARP request ein Broadcast ausgesendet? (j/n)
+j
+127) Was sind die zwei wesentlichen Elemente in einer MAC Adress Table? a) Type & Port     b) MAC Address & Port     c) MAC Address & IP Address     d) IP Address & Port
+b
+128) Was steht in der Routing Tabelle bei next hop/Gateway, wenn das entsprechende Netzwerk am Router angeschlossen ist? (Windows Schreibweise)
+on-link
+129) Was sind die zwei wesentlichen Elemente beim ARP cache? a) MAC Address & Port     b) NetID & Gateway     c) IP Address & MAC Adress
+c
+130) Die (Source-)NAT-Tabelle enthält (u.a.) folgende Elemente: inside local, inside global, outside global, outside local. In welchem Element erfolgt PAT?
+inside global

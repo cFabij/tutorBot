@@ -52,6 +52,11 @@ fi
 
 fragenkatalog="$sdFile"
 
+# Die Pfade zu den Fragenkatalogen sind absolut, weil man aufgrund des
+# Speicherorts /usr/bin und der PATH-Variable den tutorBot von überall
+# starten kann und daher klar sein muss, wo die auszulesenden
+# Fragenkataloge liegen.
+
 if [ -e "$file" ] && [ -e "$repeatFile" ]
 then
 	echo "Nur unklare Fragen wiederholen? (j/n)"
