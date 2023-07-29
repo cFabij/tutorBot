@@ -186,7 +186,7 @@ j
 255.255.255.255
 94) Wie läuft der DHCP-Prozess ab? a) Discover-Request-Offer-ACK     b) Discover-Offer-Request-ACK
 b
-95) Fragt der DHCP-Client vor Erhalt der IP-Adresse mittels ARP ab, ob die IP-Adresse bereits vergeben ist? (j/n)
+95) Gibt es im Regelfall bei der dynamischen IP-Adressen-Zuweisung via DHCP eine Anwendung von ARP, ob die IP-Adresse aktuell in Verwendung ist? (j/n)
 j
 96) Welcher DNS-Record wird für IPv4-Adressen verwendet?
 A
@@ -252,9 +252,19 @@ n
 j
 127) Was sind die zwei wesentlichen Elemente in einer MAC Adress Table? a) Type & Port     b) MAC Address & Port     c) MAC Address & IP Address     d) IP Address & Port
 b
-128) Was steht in der Routing Tabelle bei next hop/Gateway, wenn das entsprechende Netzwerk am Router angeschlossen ist? (Windows Schreibweise)
+128) Was steht in der Routing Tabelle bei next hop/Gateway, wenn das entsprechende Netzwerk am Router angeschlossen ist? (Windows Schreibweise, in Englisch)
 on-link
 129) Was sind die zwei wesentlichen Elemente beim ARP cache? a) MAC Address & Port     b) NetID & Gateway     c) IP Address & MAC Adress
 c
 130) Die (Source-)NAT-Tabelle enthält (u.a.) folgende Elemente: inside local, inside global, outside global, outside local. In welchem Element erfolgt PAT?
 inside global
+131) Kann in der MAC address table ein Port nur jeweils auf eine MAC-Adresse verweisen? (j/n)
+n
+132) Wenn ein beliebiger Client ein DHCP-Discover-Paket empfängt. Auf welchem Layer des OSI-Modells dropt er das Paket (gemäß Packet Tracer)?
+4
+133) Wenn ein DHCP-Client mit einer bestehenden IP-Adresse ein DHCP-Offer-Paket empfängt. Auf welchem Layer des OSI-Modells dropt er das Paket (gemäß Packet Tracer)?
+7
+134) Sind Layer-3-Broadcasts immer auch Layer-2-Broadcasts? (j/n)
+j
+135) Sind Layer-2-Broadcasts immer auch Layer-3-Broadcasts? (j/n)
+n
