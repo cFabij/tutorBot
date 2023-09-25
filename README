@@ -1,4 +1,5 @@
-tutorBot ist ein Shell-Skript, das den Inhalt einer Datei ausliest
+# tutorBot
+tutorBot ist ein Bash-Skript, das den Inhalt einer Datei ausliest
 und die ungeraden und geraden Zeilen jeweils in einen Array liest.
 
 Der Aufbau der Datei sollte dabei folgendem Schema folgen:
@@ -22,7 +23,8 @@ Bei erneutem Skript-Aufruf wird der User dann gefragt, ob er
 
 Der Fragenkatalog beinhaltet derzeit Grundlagen-Fragen zu Linux und Computer-Netzwerke.
 
-subnetBot ist ein Shell-Skript, das Subnetze ausrechnen kann und dem
+# subnetBot
+subnetBot ist ein Bash-Skript, das Subnetze ausrechnen kann und dem
 Nutzer auch private IPs samt Subnet Mask zum Selber rechnen gibt.
 
 Zum zweiten Fall ist die Möglichkeit der Eingabekontrolle und der
